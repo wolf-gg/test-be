@@ -4,11 +4,11 @@ const { Schema } = mongoose;
 
 const appointmentSchema = new Schema({
     from: {
-        type: Number,
+        type: Date,
         required: true
     },
     to: {
-        type: Number,
+        type: Date,
         required: true
     },
     name: {
