@@ -3,7 +3,7 @@ const {
     inMemoryMongo
 } = require('./lib');
 
-const port = 3000;
+const port = 4000;
 
 (async () => {
     await inMemoryMongo.connect();
