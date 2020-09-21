@@ -6,7 +6,9 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
     try {
-        const response = await appointmentService.findAppointments();
+        const { from, to } = req.query;
+
+        const response = await appointmentService.findAppointments(to, from);
 
         res.json(response);
     } catch (error) {

@@ -6,6 +6,19 @@ const createAppointment = async (appointment) => {
     return newAppointment.save();
 };
 
+const findAppointmentsWithFilter = async (toDate, fromDate) => Appointment.find(
+    {
+        to: {
+            $lte: toDate,
+            $gte: fromDate
+        },
+        from: {
+            $lte: toDate,
+            $gte: fromDate
+        }
+    }
+).exec();
+
 const findAppointments = async () => Appointment.find().exec();
 
 const findAppointmentById = async (id) => Appointment.findOne({ _id: id }).exec();
@@ -17,6 +30,7 @@ const updateAppointmentById = async (id, updatedAppointment) => Appointment.find
 module.exports = {
     createAppointment,
     findAppointments,
+    findAppointmentsWithFilter,
     findAppointmentById,
     deleteAppointmentById,
     updateAppointmentById

@@ -29,7 +29,16 @@ const createAppointment = async (appointment) => {
     return appointmentRepository.createAppointment(convertedAppointment);
 };
 
-const findAppointments = async () => appointmentRepository.findAppointments();
+const findAppointments = async (to, from) => {
+    if (to && from) {
+        const toDate = moment(`${to} 11:59 PM`, 'LLL').toDate();
+        const fromDate = moment(`${from} 12:00 AM`, 'LLL').toDate();
+
+        return appointmentRepository.findAppointmentsWithFilter(toDate, fromDate);
+    }
+
+    return appointmentRepository.findAppointments();
+};
 
 const findOneAppointment = async (id) => {
     const appointment = await appointmentRepository.findAppointmentById(id);
