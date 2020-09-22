@@ -1,21 +1,14 @@
-const express = require('express');
-const app = express();
-const port = 3000;
-
 const {
-    health
-} = require('./routes');
+    app,
+    inMemoryMongo
+} = require('./lib');
 
-const {
-    errorLogger,
-    globalErrorHandler
-} = require('./helpers');
+const port = 4000;
 
-app.use('/health', health);
+(async () => {
+    await inMemoryMongo.connect();
 
-app.use(errorLogger);
-app.use(globalErrorHandler);
-
-app.listen(port, () => {
-    console.log(`Listening at port ${port}`);
-});
+    app.listen(port, () => {
+        console.log(`Listening at port ${port}`);
+    });
+})();
